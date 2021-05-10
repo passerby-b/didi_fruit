@@ -29,6 +29,12 @@ const $ = new API("dd_fruit");
     await zhuLi();
     await $.wait(1000);
 
+    recDailyReward();
+    await $.wait(1000);
+
+    await water();
+    await $.wait(1000);
+
 
 })().catch(async (e) => {
     console.log('', '❌失败! 原因:' + e + '!', '');
@@ -50,7 +56,6 @@ async function water() {
                 await $.http.post(option).then(response => {
                     let data = JSON.parse(response.body);
                     if (data.errno == 0) {
-                        console.log(data);
                         console.log('\n【浇水】:' + data.errmsg + ',剩余' + data.data.pack_water + '滴水,今天已浇水' + data.data.water_times + '次');
                         if (data.data.pack_water < 10) pack_water = 0;
                     } else {
@@ -95,7 +100,8 @@ async function fertilizer() {
 async function dogInteract() {
     return new Promise(async resolve => {
         try {
-            let option = urlTask('https://game.xiaojukeji.com/api/game/plant/dogInteract?wsgsig=dd03-jrYPupTTF6oZ4BnNTskNXKUYgxNy7EJISml5i3lzgxNz4AyByb5IWRwoGMoz4hnKQfhFVvUP0StwMUvgpgOaXySm0HiuNrXHpbLIXvrw0Mmz2hvIpiw9WyYQcYY', '{"friend_id":48666702,"inter_type":2,"platform":1,"token":"' + token + '"}');
+            //let option = urlTask('https://game.xiaojukeji.com/api/game/plant/dogInteract?wsgsig=dd03-jrYPupTTF6oZ4BnNTskNXKUYgxNy7EJISml5i3lzgxNz4AyByb5IWRwoGMoz4hnKQfhFVvUP0StwMUvgpgOaXySm0HiuNrXHpbLIXvrw0Mmz2hvIpiw9WyYQcYY', '{"friend_id":48666702,"inter_type":2,"platform":1,"token":"' + token + '"}');
+            let option = urlTask('https://game.xiaojukeji.com/api/game/plant/dogInteract?wsgsig=dd03-jrYPupTTF6oZ4BnNTskNXKUYgxNy7EJISml5i3lzgxNz4AyByb5IWRwoGMoz4hnKQfhFVvUP0StwMUvgpgOaXySm0HiuNrXHpbLIXvrw0Mmz2hvIpiw9WyYQcYY', '{"inter_type":2,"platform":1,"token":"' + token + '"}');
             $.http.post(option).then(response => {
                 let data = JSON.parse(response.body);
                 console.log('\n【摸狗】:' + response.body);
@@ -210,6 +216,25 @@ async function zhuLi() {
 
         } catch (error) {
             console.log('\n【助力】:' + error);
+            resolve();
+        }
+
+    })
+}
+
+//领取助力奖励
+async function recDailyReward() {
+    return new Promise(async resolve => {
+        try {
+            let option = urlTask('https://game.xiaojukeji.com/api/game/plant/recDailyReward?wsgsig=dd03-Pvs4yx88TSQajRp7kOizqZfJzLJfmob1mSpomH0MzLJgjQW9UHGvsZN5owQgj4p3%2FLRnrPf3pxXdVNtGnxWvnZy4pL8EioRDrObvnwJ1pIjDjNWMqMuxmIG6p5O', '{"assist_pid":140749163,"platform":1,"token":"' + token + '"}');
+            $.http.post(option).then(response => {
+                let data = JSON.parse(response.body);
+                console.log('\n【领取助力奖励】:' + response.body);
+                resolve();
+            })
+
+        } catch (error) {
+            console.log('\n【领取助力奖励】:' + error);
             resolve();
         }
 

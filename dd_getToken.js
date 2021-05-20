@@ -5,7 +5,7 @@
 进果园浇一次水
 MITM添加:game.xiaojukeji.com
 每次获取会覆盖之前的ck,请先用boxjs备份
-多账号可以每次获取后复制出来最后拼在一起用英文逗号(,)分隔后一起复制到boxjs里
+多账号可以每次获取后复制出来最后拼在一起用英文逗号(,)分隔后一起复制到boxjs里 
 
 */
 const $ = new API("dd_getToken");

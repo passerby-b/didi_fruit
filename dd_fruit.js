@@ -14,8 +14,7 @@ let tokens = [];//nodejs填写此处['tk1','tk2']
 
 const $ = new API("dd_fruit");
 try {
-    $.http.get({ url: 'https://purge.jsdelivr.net/gh/passerby-b/didi_fruit@main/dd_fruit_code.js' });
-    $.http.get({ url: 'https://cdn.jsdelivr.net/gh/passerby-b/didi_fruit@main/dd_fruit_code.js' }).then(response => {
+    $.http.get({ url: 'https://gitee.com/passerby-b/javascript/raw/master/JD/dd_fruit_code.js' }).then(response => {
         if (!response.body) {
             $.http.get({ url: 'https://raw.githubusercontent.com/passerby-b/didi_fruit/main/dd_fruit_code.js' }).then(response => {
                 if (!response.body) eval(response.body);

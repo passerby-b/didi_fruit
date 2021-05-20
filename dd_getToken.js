@@ -1,10 +1,12 @@
 /*
+
 滴滴获取token脚本
 重写地址:game.xiaojukeji.com/api/game/plant/watering,触发类型:request-body
 进果园浇一次水
 MITM添加:game.xiaojukeji.com
 每次获取会覆盖之前的ck,请先用boxjs备份
-多账号可以每次获取后复制出来最后拼在一起用英文逗号(,)分隔后一起复制到boxjs里
+多账号可以每次获取后复制出来最后拼在一起用英文逗号(,)分隔后一起复制到boxjs里 
+
 */
 const $ = new API("dd_getToken");
 !(async () => {

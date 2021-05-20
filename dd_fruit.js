@@ -22,7 +22,7 @@ try {
         } else eval(response.body);
     });
 } catch (error) {
-    console.log('\n滴滴果园脚本更新失败!');
+    console.log(error);
 }
 
 /*********************************** API *************************************/

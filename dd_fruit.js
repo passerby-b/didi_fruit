@@ -13,6 +13,7 @@ docker环境变量名:DD_TOKEN,多账号换行或英文逗号(,)隔开
 let tokens = [];//nodejs填写此处['tk1','tk2'] 
 
 try {
+    const $ = new API("dd_fruit");
     $.http.get({ url: 'https://purge.jsdelivr.net/gh/passerby-b/didi_fruit@main/dd_fruit_code.js' });
     $.http.get({ url: 'https://cdn.jsdelivr.net/gh/passerby-b/didi_fruit@main/dd_fruit_code.js' }).then(response => {
         if (!response.body) {

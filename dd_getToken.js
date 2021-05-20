@@ -17,7 +17,7 @@ const $ = new API("dd_getToken");
             let tk = '';
             let data = JSON.parse(body);
             tk = data.token;
-            $.write(ck, '#ddtoken');
+            $.write(tk, '#ddtoken');
             $.notify('滴滴脚本获取token成功', '', tk);
             console.log(tk);
         }

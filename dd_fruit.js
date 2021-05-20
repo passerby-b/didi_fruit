@@ -1,6 +1,6 @@
 /*
 v.3.4
-滴滴橙心果园脚本,支持自动浇水及部分任务
+滴滴橙心果园脚本,支持自动浇水及部分任务 
 手动抓包获取token,手机在boxjs里填写
 boxjs订阅地址:https://gitee.com/passerby-b/javascript/raw/master/JD/passerby-b.boxjs.json
 docker环境变量名:DD_TOKEN,多账号换行或英文逗号(,)隔开

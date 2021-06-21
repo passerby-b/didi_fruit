@@ -15,7 +15,7 @@ let tokens = [];//nodejs填写此处['tk1','tk2']
 const $ = new API("dd_fruit");
 !(async () => {
     //https://cdn.jsdelivr.net/gh/passerby-b/didi_fruit@main/dd_fruit_code.js
-    await $.http.get({ url: 'https://raw.githubusercontents.com/passerby-b/didi_fruit/main/dd_fruit_code.js' }).then(async response => {
+    await $.http.get({ url: 'https://ghproxy.com/https://raw.githubusercontent.com/passerby-b/didi_fruit/main/dd_fruit_code.js' }).then(async response => {
         if (!!response.body) await eval(response.body);
     });
 })().catch(async (e) => {

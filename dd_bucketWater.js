@@ -11,7 +11,7 @@
 
 
 const $ = new API("dd_fruit");
-let token = '', notify = '', nickName = '';
+let tokens = [], token = '', notify = '', nickName = '';
 !(async () => {
 
     // 判断环境变量里面是否有token

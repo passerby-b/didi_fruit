@@ -43,12 +43,12 @@ let tokens = [], token = '', notify = '', nickName = '';
 
         token = tokens[i];
 
-        let userNo = await treeInfo(0);
-        if (userNo != 0) {
-            if ($.env.isNode) await notify.sendNotify('第' + (i + 1) + '个账号TOKEN过期或无效', '请去滴滴出行APP抓取TOKEN!');
-            $.notify('第' + (i + 1) + '个账号TOKEN过期或无效', '', '请去滴滴出行APP抓取TOKEN!');
-            continue;
-        }
+//         let userNo = await treeInfo(0);
+//         if (userNo != 0) {
+//             if ($.env.isNode) await notify.sendNotify('第' + (i + 1) + '个账号TOKEN过期或无效', '请去滴滴出行APP抓取TOKEN!');
+//             $.notify('第' + (i + 1) + '个账号TOKEN过期或无效', '', '请去滴滴出行APP抓取TOKEN!');
+//             continue;
+//         }
 
         await recBucketWater();
 

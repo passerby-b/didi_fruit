@@ -1,5 +1,5 @@
 
-// v1.0
+// v1.1
 // 滴滴橙心果园脚本,支持自动收水桶水滴
 // 手动抓包获取token,手机在boxjs里填写
 // boxjs订阅地址:https://gitee.com/passerby-b/javascript/raw/master/JD/passerby-b.boxjs.json
@@ -43,14 +43,17 @@ let tokens = [], token = '', notify = '', nickName = '';
 
         token = tokens[i];
 
-//         let userNo = await treeInfo(0);
-//         if (userNo != 0) {
-//             if ($.env.isNode) await notify.sendNotify('第' + (i + 1) + '个账号TOKEN过期或无效', '请去滴滴出行APP抓取TOKEN!');
-//             $.notify('第' + (i + 1) + '个账号TOKEN过期或无效', '', '请去滴滴出行APP抓取TOKEN!');
-//             continue;
-//         }
+        await userinfo();
+
+        let userNo = await treeInfo(0);
+        if (userNo != 0) {
+            if ($.env.isNode) await notify.sendNotify('滴滴果园', '第' + (i + 1) + '个账号TOKEN过期或无效,请去滴滴出行APP抓取TOKEN!');
+            $.notify('第' + (i + 1) + '个账号TOKEN过期或无效', '', '请去滴滴出行APP抓取TOKEN!');
+            continue;
+        }
 
         await recBucketWater();
+        await $.wait(2000);
 
     }
 
@@ -60,6 +63,21 @@ let tokens = [], token = '', notify = '', nickName = '';
 }).finally(() => {
     $.done();
 });
+
+//个人信息
+async function userinfo() {
+    try {
+        let option = urlTask('https://api.didialift.com/beatles/userapi/user/user/getuserinfo?TripCountry=CN&appversion=6.2.4&bts_r_city=6&channel=102&cityID=6&city_id=6&country_iso_code=CN&cur_coord_type=2&cur_role=1&datatype=101&end_install_type=1&face_permission_status=0&lang=zh-CN&locatePerm=1&maptype=soso&micPerm=0&model=iPhone&networkType=WIFI&os=14.7&scn_h=2688&scn_w=1242&sfc_type=0&terminal_id=1&token=' + token + '&v6x_version=1', '');
+        await $.http.get(option).then(response => {
+            //console.log(response.body);
+            let data = JSON.parse(response.body);
+            nickName = data.user_info.nick;
+        })
+
+    } catch (error) {
+        nickName = '昵称获取失败';
+    }
+}
 
 
 async function recBucketWater() {
@@ -96,12 +114,7 @@ async function treeInfo(step) {
                     let fname = '', growth_stage = '';
                     for (let i = 0; i < data.data.trees_cfg.length; i++) {
                         const element = data.data.trees_cfg[i];
-                        if (element.tree_id == data.data.tree_info.tree_id) fname = element.name; growth_stage = element.growth_stage[5];
-                    }
-                    try {
-                        nickName = data.data.interacts[0].f_nick;
-                    } catch (error) {
-                        nickName = '昵称获取失败';
+                        if (element.tree_id == data.data.tree_info.tree_id) fname = element.name; growth_stage = data.data.tree_info.growth_stage[5];
                     }
                     //let msg = fname + ':' + data.data.tree_info.tree_progress + '%,剩余' + data.data.tree_info.pack_water + '滴水,助力:' + assist_record + '/4';
                     let msg = fname + ':' + (data.data.tree_info.tree_water / growth_stage * 100).toFixed(2) + '%,剩余' + data.data.tree_info.pack_water + '滴水,助力:' + assist_record + '/4';
